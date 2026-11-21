@@ -77,7 +77,7 @@ def sw(k):
 
 P = parts.Band(S, PROG, scale=SCALE, diva_voice=DIVA, timbre=TIMBRE, stack=STACK, harmony=HARMONY, accent=ACCENT,
                verse_double=0.0)
-P.ds_gain = 2.0                       # the diva's level (DS_GAIN overrides it)
+P.ds_gain = 2.5                       # her level (DS_GAIN overrides it); 2.0: Whisper 53 %, 2.5: 74 %
 
 
 def is_chorus(bar):

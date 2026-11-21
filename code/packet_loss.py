@@ -72,7 +72,7 @@ if LEM:
     def _singer(timbre):
         b = parts.Band(S, VERSE_PROG, diva_voice=DIVA, timbre=timbre,
                        stack="", harmony="", accent=ACCENT, verse_double=0.0)
-        b.ds_gain = 1.45              # the vox bus is 2.0 here (Common Ground: 1.45 x 2.0)
+        b.ds_gain = 1.8               # 1.45 buried the words (Whisper 31 % -> 53 %)
         return b
 
     SINGER = {HER: _singer(HER_TIMBRE), HIM: _singer(HIM_TIMBRE)}
