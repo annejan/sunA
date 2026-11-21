@@ -48,12 +48,14 @@ STEP = S.step
 B = S.beat
 
 DIVA = os.environ.get("DIVA", "ds:lem")
-RAPPER = os.environ.get("RAPPER", "en_GB-alan-medium")
+RAPPER = os.environ.get("RAPPER", "en_GB-alan-medium")      # the user kept Piper over a Maya and a Qwen MC (21 November, an ABC)
 # the deep-voiced MC of the song's idea, a Maya voice of our own (RAPPER=maya_mc_deep; maya_hype and qwen_hype are
 # the cast's rave MCs). A Maya or Qwen MC speaks at its own pace and is squeezed only when a line runs long
 V.CAST.setdefault("maya_mc_deep", "maya:Realistic male voice in the 30s age with a american accent. Low pitch, deep "
                                   "timbre, moderate pacing, excited tone delivery at high intensity, entertainment "
                                   "domain, event_host role, confident delivery. A deep-voiced eurodance rap MC.#301")
+V.CAST.setdefault("qwen_mc_deep", "qwen:Male, adult, deep low-pitched voice. A confident 90s eurodance rap MC, "
+                                  "punchy and rhythmic, every word clear, riding the beat.#301")
 # CROWD=1 (19 November, an A/B; research/toolkit-2026-11-19.md): crowd moments. The title in the echo while the riff
 # comes in (the first title came 28 s after the music); the band stops for the bar before the last chorus
 # ("Everybody!"); in the second pass of the last chorus the diva leaves the first line to the room ("Sing it!", 16
