@@ -290,6 +290,7 @@ Keep:
 - The kit's own chords under a take.
 - The Saturday entry (21 November): **Low Pass Love**, "it really sounds the nicest" (French filter house, the talk
   box). Whisper heard 35 % of its words, the lowest of the singing songs: rank songs by ear, not by Whisper.
+  The compo's verdict: "a bit too much, apparently not sparse enough". Saturday wants even fewer parts.
 
 Avoid (lost by ear):
 - A flat DiffSinger pitch ("almost GLaDOS, but more dead inside"); a sung reference as the timbre ("through a
