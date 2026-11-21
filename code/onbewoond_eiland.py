@@ -64,9 +64,17 @@ for bar in range(6):
 S.put("keys", S.at(6), e.piano(43, 2.0, .7), .45, .35, wet=.3)    # the last low G under "dood"
 
 line1, line2 = " ".join(LINE1), " ".join(LINE2)
-P.diva(2, line1, WORDS1[0], bars=2, ds_words=WORDS1[1])
-P.diva(4, line2, WORDS2[0], bars=2, ds_words=WORDS2[1])
-P.finish()
+if os.environ.get("GUIDE") == "1":
+    # no singer: the tune on a clear, flute-like tone through the sung bars, for ACE-Step's cover to sing along to
+    # (the user: "without the melody [singer], but feed it to ACE as notes")
+    for t, m, d in S.notes(2, line1, bars=2) + S.notes(4, line2, bars=2):
+        tt = e.tt(d)
+        g = e.sine(e.hz(m), tt, 0.0) + .2 * e.sine(2 * e.hz(m), tt, 0.0)
+        S.put("lead", t, g * e.rise(tt, .02) * e.gate(tt, d * .95, .05) * .35, .5, 1.0, wet=.15)
+else:
+    P.diva(2, line1, WORDS1[0], bars=2, ds_words=WORDS1[1])
+    P.diva(4, line2, WORDS2[0], bars=2, ds_words=WORDS2[1])
+    P.finish()
 
 NAME = f"onbewoond-eiland_{BPM}bpm_{KEY}"
 S.mixdown(parts.out_path(NAME), {"keys": 1.0, "lead": .9, "vox": 1.5}, room=.2, echo_mix=.3, lufs=-11.0,
