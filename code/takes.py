@@ -428,6 +428,7 @@ def main():
     ap.add_argument("--n", type=int, default=4, help="drafts: how many (default 4)")
     ap.add_argument("--lm-seed", type=int, default=1000, help="drafts: the first LM seed (the tunes)")
     ap.add_argument("--name", default="draft", help="drafts: the files' name")
+    ap.add_argument("--lang", default="en", help="drafts: the sung language (ACE-Step's vocal_language: en, nl, ...)")
     ap.add_argument("--keep", metavar="JSON", help="render a picked draft's JSON again with SFT (with --chords: its own fit)")
     ap.add_argument("--guidance", type=float, help="keep: the DiT's guidance (SFT preset 1.0; docs 7.0)")
     ap.add_argument("--shift", type=float, help="keep: the schedule shift (SFT preset 1.0; docs 3.0)")
@@ -450,7 +451,7 @@ def main():
             ap.error("--drafts needs --caption, --lines, --bpm, --key and --chords")
         out = os.path.join(TAKES, ace.script_name(a.song)) if a.song else None
         draft_round(a.caption, a.lines.split("|"), a.bpm, a.key, a.chords.split(), a.bars, a.tag, a.lift, a.n,
-                    a.lm_seed, out, a.name)
+                    a.lm_seed, out, a.name, a.lang)
         return
     seeds = [int(s) for s in a.seeds.split(",")] if a.seeds else None
     if a.menu:

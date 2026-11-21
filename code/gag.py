@@ -27,7 +27,8 @@ MODELS = {"best": dict(lm_model=ace.LM, **ace.SYNTH["sft"]),
           "fast": dict(lm_model="acestep-5Hz-lm-1.7B-Q8_0.gguf", **ace.SYNTH["turbo"])}
 
 
-def make(title, lyrics, style, bpm, key="A minor", lang="en", seconds=120, seed=1, fast=False, out=None):
+def make(title, lyrics, style, bpm, key="A minor", lang="en", seconds=120, seed=1, fast=False, out=None, guidance=None,
+         shift=None):
     """The song: the request, the LM, the DiT, the master, the MP3. Returns (mp3, seconds per stage)."""
     name = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-") or "gag"
     if seed != 1:                    # each seed its own folder and file: the same title used to overwrite seed 1
@@ -37,6 +38,10 @@ def make(title, lyrics, style, bpm, key="A minor", lang="en", seconds=120, seed=
     req = {"caption": style, "lyrics": lyrics, "bpm": int(bpm), "keyscale": key, "timesignature": "4",
            "vocal_language": lang, "seed": seed, "output_format": "wav16", "duration": int(seconds),
            **MODELS["fast" if fast else "best"]}
+    if guidance:                     # CFG on (the docs' 7.0 with shift 3.0): cleaner, about twice as slow
+        req["guidance_scale"] = guidance
+    if shift:
+        req["shift"] = shift
     base = os.path.join(out, "request")
     json.dump(req, open(base + ".json", "w"), indent=1, ensure_ascii=False)
 
@@ -67,9 +72,11 @@ def main():
     ap.add_argument("--seconds", type=int, default=120)
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--fast", action="store_true", help="the 1.7B LM and turbo: about 70 s instead of 150 s")
+    ap.add_argument("--guidance", type=float, help="the DiT's CFG (SFT preset 1.0; the docs: 7.0, twice as slow)")
+    ap.add_argument("--shift", type=float, help="the DiT's schedule shift (SFT preset 1.0; the docs: 3.0)")
     a = ap.parse_args()
     mp3, t = make(a.title, open(a.lyrics, encoding="utf-8").read(), a.style, a.bpm, a.key, a.lang, a.seconds, a.seed,
-                  a.fast)
+                  a.fast, guidance=a.guidance, shift=a.shift)
     print(f"LM {t['lm']:.0f} s, audio {t['audio']:.0f} s, master and MP3 {t['master']:.0f} s: {sum(t.values()):.0f} s "
           f"in all")
     print(mp3)

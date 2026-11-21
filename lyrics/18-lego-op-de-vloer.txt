@@ -1,0 +1,48 @@
+Lego Op De Vloer
+Round two: Kinderen voor Kinderen (kinderthema met komisch geweld) · 132 BPM · C major · 2:20
+Words by Claude. Music and voices: ACE-Step 1.5 (text2music, our words and caption, seed 3, CFG 7):
+KINDEREN: a children's choir; ROEPER: a grown-up.
+
+[0:00] Intro (Hihihi!)
+[0:04] KINDEREN: Het is middernacht, het hele huis is stil
+KINDEREN: Papa sluipt de trap af, want hij weet wat hij wil
+KINDEREN: De laatste plak taart, die staat nog in de koelkast
+KINDEREN: Maar op de trap ligt Lego, en daar staat zijn voet op vast!
+
+[0:18] Refrein
+KINDEREN: Lego op de vloer! (AU!) Hoor papa eens gillen! (AU!)
+KINDEREN: Hij hinkt door de gang en zijn benen trillen!
+KINDEREN: Lego op de vloer! (AU!) Wat een kabaal! (AU!)
+KINDEREN: En dat is pas het begin van het verhaal!
+
+[0:37] KINDEREN: Hij grijpt naar het gordijn, dat scheurt meteen
+KINDEREN: De lamp valt van de kast, de kat schiet ertussenheen
+KINDEREN: De kat springt op mama, mama valt van schrik
+KINDEREN: Recht in de afwas, plons! En wie er lacht? Dat ben ik!
+
+[0:51] Refrein
+KINDEREN: Lego op de vloer! (AU!) Hoor mama eens gillen! (AU!)
+KINDEREN: Ze druipt door de gang en haar benen trillen!
+KINDEREN: Lego op de vloer! (AU!) Wat een kabaal! (AU!)
+KINDEREN: En dat is nog lang niet het eind van het verhaal!
+
+[1:06] Instrumentaal
+[1:14] ROEPER: Wie heeft dat daar neergelegd?!
+KINDEREN: Niet ik! Niet ik!
+ROEPER: Wie dan?!
+KINDEREN: De kat! (MIAUW!)
+
+[1:20] KINDEREN: Opa komt kijken: wat is dat voor lawaai?
+KINDEREN: Hij glijdt door het sop en maakt een hele draai
+KINDEREN: Hij rolt de deur uit en de dijk af, steeds sneller
+KINDEREN: En met een grote BOEM belandt hij bij de buren in de kelder!
+
+[1:38] Refrein (twee keer)
+KINDEREN: Lego op de vloer! (AU!) Hoor opa eens gillen! (AU!)
+KINDEREN: Hij ligt in de kelder en zijn benen trillen!
+KINDEREN: Lego op de vloer! (AU!) Wat een kabaal! (AU!)
+KINDEREN: En dat was het einde van het verhaal!
+
+[2:10] ROEPER: Wie wil er Lego spelen?
+KINDEREN: NEE!
+[2:16] BOEM! (the end)

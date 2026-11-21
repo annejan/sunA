@@ -40,16 +40,20 @@ SONGS = [
     ("can-you-tell_136bpm_Cm.wav", "Can You Tell?", "Sunday: eurodance", 136, "Cm", 128),
     ("keep-alive_118bpm_Gm.wav", "Keep Alive", "Saturday: 90's mellow house", 118, "Gm", 112),
     ("nothings-broken_122bpm_F.wav", "Nothing's Broken", "Saturday: 90's mellow house", 122, "F", 112),
+    ("lego-op-de-vloer_132bpm_C.wav", "Lego Op De Vloer", "Round two: Kinderen voor Kinderen", 132, "C", 76),
 ]
 
 
 RADIO_FADE_BARS = {"flash-the-c6_174bpm_Fm.wav": 2}    # its last bars before the outro are the punchline ("Told you.")
+NO_DJ_ENDS = {"lego-op-de-vloer_132bpm_C.wav"}   # round two: no drum ends (the user); the radio edit is it all
 
 
 def radio_window(bpm, bars, wav=None):
     """(start, length, fade) in seconds: from the end of the DJ intro to two bars into the DJ outro. The fade is four
     bars, or a song's own length in RADIO_FADE_BARS."""
     bar = 240 / bpm
+    if wav in NO_DJ_ENDS:
+        return 0.0, (bars + 2) * bar, 0.0
     start = DJ_BARS * bar
     end = (bars - DJ_BARS + 2) * bar
     return start, end - start, RADIO_FADE_BARS.get(wav, 4) * bar
