@@ -527,7 +527,7 @@ AB_VARS = ("PREVIEW", "SOLO", "MUTE", "GAIN", "AIR", "CAST", "CROWD", "CHOPS", "
            # the songs' own voice and sound switches (their defaults are the approved renders; DIVA stays out: a
            # template song may pick its diva with it)
            "RAPPER", "SYSTEM", "MOUTH", "CHOIR", "CHORUS_STYLE", "KEYS", "ROOM", "GLITCH", "VOX_HUMAN", "VOXCHAIN",
-           "UNMASK", "DS_VOICE", "DS_PITCH", "DS_SEED", "DS_TIMBRE", "DS_STACK", "DS_FLASH", "DS_ACCENT", "DS_HARMONY", "DS_TENSION", "DS_VIB", "DS_BREATH", "DS_DYN", "DS_COMP", "DS_COMP_TAKES", "DS_GAIN", "DS_CONS", "DIVA_SEED", "TAKE_SEED", "MC_SEED", "MC_VOICE", "MC_TAKES", "SINGER_SEED",
+           "UNMASK", "DS_VOICE", "DS_PITCH", "DS_SEED", "DS_TIMBRE", "DS_STACK", "DS_FLASH", "DS_ACCENT", "DS_HARMONY", "DS_TENSION", "DS_VIB", "DS_BREATH", "DS_DYN", "DS_COMP", "DS_COMP_TAKES", "DS_GAIN", "BLINK_GAP", "DS_CONS", "DIVA_SEED", "TAKE_SEED", "MC_SEED", "MC_VOICE", "MC_TAKES", "SINGER_SEED",
            "SOUL_VINYL", "SOUL_VOICE", "SOUL_STEM", "SOUL_PIPER", "SOUL_PACE", "SOUL_OURS", "SOUL_ACE")
 
 

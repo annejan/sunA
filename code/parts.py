@@ -105,6 +105,7 @@ class Band:
         self.choir = choir or CHOIR
         self.kick_kw = kick or dict(punch=130, base=50, length=.34, click=.4)
         self.ds = self.diva_voice.startswith("ds:")
+        self.knobs = {}             # a song's own singer D settings over parts.LEM (cons="1"); DS_* still win
         self.ds_gain = 2.0          # the DiffSinger diva's level (DS_GAIN overrides it): an octave above the Piper
                                     # diva she sits in the keys' range; in the template the ear heard 0 of 32 verse
                                     # words at 1.0, 18 at 1.6, 22 at 2.5 (the Piper diva: 14)
@@ -119,7 +120,7 @@ class Band:
             self.ds_part = ds.Part(S.bpm)
             self.ds_harm = ds.Part(S.bpm)
             bank = self.diva_voice.split(":", 1)[1]
-            d = LEM if bank == "lem" else {}
+            d = dict(LEM if bank == "lem" else {}, **self.knobs)       # a song's own settings over the defaults
             env = lambda k, v: os.environ.get(k, v if v is not None else d.get(k[3:].lower(), ""))   # noqa: E731
             self.ds_voice = os.environ.get("DS_VOICE", ds_voice or d.get("ds_voice", "Fragrance"))
             self.timbre = env("DS_TIMBRE", timbre) or None
@@ -313,7 +314,7 @@ class Band:
             return
         S = self.S
         bank = self.diva_voice.split(":", 1)[1]
-        d = LEM if bank == "lem" else {}
+        d = dict(LEM if bank == "lem" else {}, **self.knobs)       # a song's own settings over the defaults
         knob = lambda k, v: os.environ.get("DS_" + k.upper(), d.get(k, v))   # noqa: E731
         pitch = knob("pitch", "0.5")
         tension, vib = float(knob("tension", "0")), float(knob("vib", "1"))

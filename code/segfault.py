@@ -281,6 +281,7 @@ P = None
 if SINGER_D:
     P = parts.Band(S, PROG, scale="minor", key_of=key_of, tonic="A", diva_voice=DIVA, timbre=TIMBRE, stack=STACK,
                    harmony=HARMONY, accent=ACCENT, verse_double=0.0)
+    P.knobs["cons"] = "1"   # Lem's consonants under the Qwen diva: "reboot" heard 2 of 2 (without: "free boot")
 
 
 def sing(bar, line, words, bars=1, amp=1.0, dbl=0.0, harm=0.0, echo=.35, octave=D_OCTAVE):

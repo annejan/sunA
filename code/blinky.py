@@ -331,12 +331,20 @@ def diva(bar, line, words, ds_words=None, bars=1, amp=1.0, choir=0.0, big=False,
         sing(bar, line, words, ds_words, bars, amp, choir * (1.2 if big else 1.0), echo_last)
 
 
+# BLINK_GAP=1 (an A/B, 21 November): a sixteenth rest after each "blink", so its "k" is heard before the next "b".
+# Whisper heard "bling" without it and "drink" or "thank" with it, and the whole song worse (36 % against 43 %): off
+D_LINE = {} if os.environ.get("BLINK_GAP") != "1" else {
+    line: line.replace(f"{a} - - {b} - -", f"{a} - . {b} - .", 1)
+    for line, _, w in CHORUS if w == BLINKY for a, b in [line.split()[0:4:3]]}
+
+
 def sing(bar, line, words, ds_words=None, bars=1, amp=1.0, harm=0.0, echo=.35):
     """Singer D sings a line, an octave below the written notes. harm > 0 (the chorus): the doubles at .55 and a
     harmony a third above at amp * harm (a third below when above would pass D5); else the doubles at the verse's
     level. echo: the last word into the delay."""
     if not S.live(bar, bars):
         return
+    line = D_LINE.get(line, line)
     P.diva(bar, line, words, bars=bars, amp=amp, octave=OCTAVE - 12, ds_words=ds_words)   # Band: +12
     t0, t1, a, last, _ = P.ds_lines[-1]
     P.ds_lines[-1] = (t0, t1, a, last, echo)
