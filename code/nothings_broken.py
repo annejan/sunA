@@ -12,7 +12,7 @@ like the records (the user, 20 November: "the originals back then were more empt
 vocal take on top", and on this one: "keep it a bit minimal"): a round kick, a clap, an open hat, three congas a
 bar, a round bass of three notes a bar, two soft piano chords a bar behind a filter. Bbmaj7 - Am7 - Gm7 - C7sus
 (C7 on the turn into each chorus): IV - iii - ii - V, warm and major, unlike the minor songs around it. One
-singer, a man this time (the other Saturday songs are mostly women), long stretches of groove without words.
+singer, long stretches of groove without words.
 
   bars   0-15  intro: drums (for the DJ)
         16-23  the bass and the congas
@@ -26,7 +26,7 @@ singer, a man this time (the other Saturday songs are mostly women), long stretc
 
 The singer: Lem the Shapeshifter DS 2.5 (DiffSinger) sings our notes at the written pitch, alive (parts.LEM: the
 rule tuner, vibrato, tension, breaths, phrase dynamics, the comp of four takes); SoulX-Singer SVC turns him into
-a bright Qwen tenor. No doubles, no harmony. Shape the tune fast with Lem alone:
+a soulful Qwen voice. No doubles, no harmony. Shape the tune fast with Lem alone:
 DS_TIMBRE= PREVIEW=40-48 .venv/bin/python nothings_broken.py.
 """
 import os
@@ -48,7 +48,7 @@ SCALE = "major"
 GROOVE = parts.GROOVES["house"]       # its swing (.16 of a sixteenth) for every part here
 LUFS = -10.0
 DIVA = os.environ.get("DIVA", "ds:lem")
-TIMBRE = "sing_qwen_tenor"            # a man: bright and smooth (the baritone is Low Pass Love's)
+TIMBRE = "sing_qwen_soul"             # the tenor (renders/scratch/*-tenor.wav) sounded "belabberd" up at F4-A4
 STACK = ""                            # one singer: no doubles, no octave, no vocoder (sparse, like the records)
 HARMONY = ""                          # no harmony
 ACCENT = {"broken": 2}
@@ -78,7 +78,7 @@ def sw(k):
 
 P = parts.Band(S, PROG, scale=SCALE, diva_voice=DIVA, timbre=TIMBRE, stack=STACK, harmony=HARMONY, accent=ACCENT,
                verse_double=0.0)
-P.ds_gain = 2.5                       # his level (DS_GAIN overrides it): Common Ground's and Keep Alive's
+P.ds_gain = 2.5                       # her level (DS_GAIN overrides it): Common Ground's and Keep Alive's
 
 
 def is_chorus(bar):
@@ -153,7 +153,7 @@ def pad(bar, amp=1.0, cut=1500):
 
 # ---------------------------------------------------------------- the words and the tunes
 # one token per sixteenth, "-" holds, "." rests; words one per note, "+" holds a word over the next note. Lem sings
-# the written pitch, the tenor keeps it: the steady notes on F4-A4 (D4, E4 below), Bb4 the top, on "dance" only.
+# the written pitch, the voice keeps it: the steady notes on F4-A4 (D4, E4 below), Bb4 the top, on "dance" only.
 # Stressed and consonant-heavy words get a quarter note, no "every" on two fast eighths (Keep Alive: "and I need").
 HOOK = ("A4 - G4 - A4 - - - G4 - F4 - G4 - - -  - - - - - - . . . . . . . . . .", "nothing's + broken + tonight +")
 CHORUS = [
