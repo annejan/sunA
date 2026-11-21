@@ -38,6 +38,7 @@ SONGS = [
     ("rubber-duck_120bpm_Dm.wav", "Rubber Duck", "Rehearsal: disco", 120, "Dm", 112),
     ("common-ground_120bpm_Cm.wav", "Common Ground", "Saturday: 90's mellow house", 120, "Cm", 112),
     ("can-you-tell_136bpm_Cm.wav", "Can You Tell?", "Sunday: eurodance", 136, "Cm", 128),
+    ("keep-alive_118bpm_Gm.wav", "Keep Alive", "Saturday: 90's mellow house", 118, "Gm", 112),
 ]
 
 
