@@ -1,9 +1,9 @@
 Blinky (The LED Song)
 Sunday: bubblegum eurodance · 132 BPM · D major,
 E major in the last chorus · 3:26
-Words by Claude. Voices: DIVA: en_US-lessac,
-CHOIR: amy, jenny_dioco, cori (+ hfc_male in the last
-chorus), RAPPER: en_US-bryce, GANG: joe, john, alan,
+Words by Claude. Voices: DIVA: Lem the Shapeshifter DS 2.5 (DiffSinger)
+in a Qwen voice; doubles in Qwen and Maya voices, a harmony in a
+Maya voice; RAPPER: en_US-bryce, GANG: joe, john, alan,
 norman. LED: bleeps.
 
 [0:00] Intro (drums)
@@ -21,26 +21,26 @@ DIVA: When you write a one to me
 DIVA: I light up, can't you see?
 
 [0:58] Chorus
-DIVA & CHOIR: Blink, blink, blinky (LED: blink blink)
-DIVA & CHOIR: On and off all night
-DIVA & CHOIR: Blink, blink, blinky (LED: blink blink)
-DIVA & CHOIR: Red and green and white
-DIVA & CHOIR: Toggle me, baby
-DIVA & CHOIR: GPIO high
-DIVA & CHOIR: Blink, blink, blinky (LED: blink blink)
-DIVA & CHOIR: Light up the sky
+DIVA & HARMONY: Blink, blink, blinky (LED: blink blink)
+DIVA & HARMONY: On and off all night
+DIVA & HARMONY: Blink, blink, blinky (LED: blink blink)
+DIVA & HARMONY: Red and green and white
+DIVA & HARMONY: Toggle me, baby
+DIVA & HARMONY: GPIO high
+DIVA & HARMONY: Blink, blink, blinky (LED: blink blink)
+DIVA & HARMONY: Light up the sky
 
 [1:12] Chorus
 GANG: Hey!
-DIVA & CHOIR: Blink, blink, blinky (LED: blink blink)
-DIVA & CHOIR: On and off all night
-DIVA & CHOIR: Blink, blink, blinky (LED: blink blink)
-DIVA & CHOIR: Red and green and white
+DIVA & HARMONY: Blink, blink, blinky (LED: blink blink)
+DIVA & HARMONY: On and off all night
+DIVA & HARMONY: Blink, blink, blinky (LED: blink blink)
+DIVA & HARMONY: Red and green and white
 GANG: Hey!
-DIVA & CHOIR: Toggle me, baby
-DIVA & CHOIR: GPIO high
-DIVA & CHOIR: Blink, blink, blinky (LED: blink blink)
-DIVA & CHOIR: Light up the sky
+DIVA & HARMONY: Toggle me, baby
+DIVA & HARMONY: GPIO high
+DIVA & HARMONY: Blink, blink, blinky (LED: blink blink)
+DIVA & HARMONY: Light up the sky
 
 [1:27] Rap
 GANG: Hey!
@@ -61,26 +61,26 @@ GANG: Hey! Hey! Hey! Hey!
 [1:54] GANG: Zero! One! Two! Three!
 
 [1:56] Last chorus (a tone up)
-DIVA & CHOIR: Blink, blink, blinky (LED: blink blink)
-DIVA & CHOIR: On and off all night
-DIVA & CHOIR: Blink, blink, blinky (LED: blink blink)
-DIVA & CHOIR: Red and green and white
-DIVA & CHOIR: Toggle me, baby
-DIVA & CHOIR: GPIO high
-DIVA & CHOIR: Blink, blink, blinky (LED: blink blink)
-DIVA & CHOIR: Light up the sky
+DIVA & HARMONY: Blink, blink, blinky (LED: blink blink)
+DIVA & HARMONY: On and off all night
+DIVA & HARMONY: Blink, blink, blinky (LED: blink blink)
+DIVA & HARMONY: Red and green and white
+DIVA & HARMONY: Toggle me, baby
+DIVA & HARMONY: GPIO high
+DIVA & HARMONY: Blink, blink, blinky (LED: blink blink)
+DIVA & HARMONY: Light up the sky
 
 [2:10] Last chorus, again
 GANG: Hey!
-DIVA & CHOIR: Blink, blink, blinky (LED: blink blink)
-DIVA & CHOIR: On and off all night
-DIVA & CHOIR: Blink, blink, blinky (LED: blink blink)
-DIVA & CHOIR: Red and green and white
+DIVA & HARMONY: Blink, blink, blinky (LED: blink blink)
+DIVA & HARMONY: On and off all night
+DIVA & HARMONY: Blink, blink, blinky (LED: blink blink)
+DIVA & HARMONY: Red and green and white
 GANG: Hey!
-DIVA & CHOIR: Toggle me, baby
-DIVA & CHOIR: GPIO high
-DIVA & CHOIR: Blink, blink, blinky (LED: blink blink)
-DIVA & CHOIR: Light up the sky
+DIVA & HARMONY: Toggle me, baby
+DIVA & HARMONY: GPIO high
+DIVA & HARMONY: Blink, blink, blinky (LED: blink blink)
+DIVA & HARMONY: Light up the sky
 
 [2:25] Post-chorus (the riff, slide whistle)
 GANG: Hey!

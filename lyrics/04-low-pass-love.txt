@@ -1,8 +1,8 @@
 Low Pass Love
 Saturday: 90's mellow house (French house) · 122 BPM · A minor · 4:14
 Words by Claude. Voices: TALK BOX: a synth through Ryan's
-mouth; SINGER: HFC Male; CHOIR: Joe, Alan, John;
-FALSETTO: Bryce; VOICE: Norman
+mouth; SINGER: Lem the Shapeshifter DS 2.5 (DiffSinger) in a Qwen
+baritone; VOICE: Norman
 
 [0:00] Intro (drums only)
 
@@ -23,9 +23,9 @@ TALK BOX: Let the highs come through
 SINGER: You cut me off at eighty hertz
 (the filter drops to 80 Hz)
 SINGER: Now all I hear is bass
-SINGER + CHOIR: Turn the knob a little, baby
+SINGER: Turn the knob a little, baby
 (the filter opens)
-SINGER + CHOIR: Put the treble in its place
+SINGER: Put the treble in its place
 (the treble comes back)
 
 [2:06] Hook
@@ -37,15 +37,15 @@ TALK BOX: Let the highs come through
 [2:22] Break (no kick)
 TALK BOX: Close it, close it
 (the filter closes; only the bass is left)
-[2:30] SINGER + CHOIR: Open up
+[2:30] SINGER: Open up
 [2:34] VOICE (spoken): From twenty hertz to twenty K.
 (the filter opens; a riser)
 
 [2:37] Hook
-TALK BOX + SINGER + CHOIR: Low pass love
-TALK BOX + SINGER + CHOIR: Open up the filter
-TALK BOX + SINGER + CHOIR: Low pass love
-TALK BOX + SINGER + CHOIR: Let the highs come through
+TALK BOX + SINGER: Low pass love
+TALK BOX + SINGER: Open up the filter
+TALK BOX + SINGER: Low pass love
+TALK BOX + SINGER: Let the highs come through
 
 [2:53] Hook (the falsetto joins)
 ALL: Low pass love

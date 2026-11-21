@@ -1,7 +1,8 @@
 The Rhythm Of The Badge
 Sunday: eurodance · 134 BPM · E minor, F# minor in the last chorus · 3:37
-Words by Claude. Voices: DIVA: Amy; MC: Alan (pitched
-down); CHOIR: Jenny, Lessac, Cori (+ Norman and Kristin
+Words by Claude. Voices: DIVA: Lem the Shapeshifter DS 2.5 (DiffSinger)
+in a Qwen voice; doubles in Qwen and Maya voices, an octave and a
+vocoder; MC: Alan (pitched down); CHOIR: Jenny, Lessac, Cori (+ Norman and Kristin
 in the last chorus)
 
 [0:00] Intro (drums only)

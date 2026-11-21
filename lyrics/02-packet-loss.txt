@@ -1,7 +1,7 @@
 Packet Loss (Of Love)
 Saturday: 90's mellow house · 122 BPM · F minor · 3:58
-Words by Claude. Voices: HIM: hfc_male, HER: hfc_female,
-CHOIR: Cori, Kristin, LJSpeech, Alan, John,
+Words by Claude. Voices: HER and HIM: Lem the Shapeshifter DS 2.5 (DiffSinger),
+her in a soulful Qwen voice, him in a Qwen tenor;
 COMPUTER: Lessac (Piper).
 
 [0:00] Intro (drums only; the rain starts)
@@ -26,9 +26,9 @@ HIM: Ack, ack.
 
 [1:19] Chorus (x2)
 HER+HIM: Packet loss of love
-CHOIR: Say it once again
+HIM: Say it once again
 HER+HIM: Packet loss of love
-CHOIR: Say it once again
+HIM: Say it once again
 HIM: Ping me when you're ready
 HER: I'll be waiting up
 HER+HIM: Packet loss of love
@@ -45,9 +45,9 @@ COMPUTER: Packet loss: fifty percent.
 
 [2:22] Chorus
 HER+HIM: Packet loss of love
-CHOIR: Say it once again
+HIM: Say it once again
 HER+HIM: Packet loss of love
-CHOIR: Say it once again
+HIM: Say it once again
 HIM: Ping me when you're ready
 HER: I'll be waiting up
 HER+HIM: Packet loss of love
@@ -55,9 +55,9 @@ HER+HIM: Packet loss of love
 
 [2:37] Chorus (the lead vocal drops packets)
 HER+HIM: Packet loss of love
-CHOIR: Say it once again
+HIM: Say it once again
 HER+HIM: Packet loss of love
-CHOIR: Say it once again
+HIM: Say it once again
 HIM: Ping me when you're ready
 HER: I'll be waiting up
 HER+HIM: Packet loss of love

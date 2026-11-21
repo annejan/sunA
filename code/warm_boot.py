@@ -9,7 +9,8 @@ a warm boot. The first and last 16 bars are drums only, for the DJ.
 
   bars   0-15  intro: kick and hats, then clap and shaker (drums only)
         16-31  the bass, and a Rhodes behind a door
-        32-47  verse: the Rhodes, the pad, the "ooh"s; two soft lines (40, 44): "bring me back slow"
+        32-47  verse: the Rhodes, the pad (and the robot's "ooh"s; singer D has them only in the break); two
+               soft lines (40, 44): "bring me back slow"
         48-63  chorus: M1 organ stabs; a line every 4 bars: "hold me tight / we made it through the night /
                warm boot, baby / you light me up"
         64-71  break: no kick, no bass, filtered; one soft "hold on"; a riser out of it
@@ -243,13 +244,18 @@ for bar in range(120):
         rhodes_comp(bar, .8, cut=900 + (bar - 24) * 300)
     if 32 <= bar < 104:
         rhodes_comp(bar, .85 if brk else 1.0)
+    # singer D gets room (the producer, 21 November: "too busy" in the vocal range): the "ooh"s only in the break,
+    # the organ and the Rhodes melody only in the two bars after each sung line (an answer, not a second singer),
+    # the pad softer. The robot keeps the approved arrangement
+    room_for_her = SINGER != "robot"
+    answer = not room_for_her or bar % 4 >= 2
     if 32 <= bar < 88:
-        pads(bar, 1.2 if brk else 1.0, cut=2400 if brk else 1600)
-    if 32 <= bar < 88 and bar % 2 == 0:
+        pads(bar, 1.2 if brk else (.7 if room_for_her else 1.0), cut=2400 if brk else 1600)
+    if 32 <= bar < 88 and bar % 2 == 0 and (brk or not room_for_her):
         oohs(bar, 1.4 if brk else 1.0)
-    if (48 <= bar < 64) or (72 <= bar < 88):
+    if ((48 <= bar < 64) or (72 <= bar < 88)) and answer:
         organ_stabs(bar)
-    if 72 <= bar < 88:
+    if 72 <= bar < 88 and answer:
         melody(bar)
     if 96 <= bar < 104:
         pads(bar, .5, cut=900)

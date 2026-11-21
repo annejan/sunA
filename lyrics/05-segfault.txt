@@ -1,10 +1,9 @@
 Segfault (In My Heart)
 Sunday: eurodance · 132 BPM · A minor, B minor from
 2:25 (bar 80) · 3:26
-Words by Claude. Voices: DIVA: en_US-hfc_female,
-CHOIR: ljspeech, kristin, cori (+ hfc_male and
-cmu_us_slt in the last chorus), RAPPER: en_US-ryan,
-ROBOT: vocoder robot (synth formants).
+Words by Claude. Voices: DIVA: Lem the Shapeshifter DS 2.5 (DiffSinger)
+in a Qwen voice; doubles in Qwen and Maya voices, a harmony in a
+Maya voice; RAPPER: en_US-ryan; ROBOT: vocoder robot (synth formants).
 
 [0:00] Intro (drums)
 
@@ -29,16 +28,16 @@ RAPPER: Get up, get down, get the backtrace now!
 RAPPER: Segfault, segfault, let me show you how!
 
 [1:12] Pre-chorus (snare roll, riser from 1:20)
-DIVA & CHOIR: Oh, oh, oh
-DIVA & CHOIR: Something's going wrong
-DIVA & CHOIR: Oh, oh, oh
-DIVA & CHOIR: Something's going wrong
+DIVA & HARMONY: Oh, oh, oh
+DIVA & HARMONY: Something's going wrong
+DIVA & HARMONY: Oh, oh, oh
+DIVA & HARMONY: Something's going wrong
 
 [1:27] Chorus (x4)
-DIVA & CHOIR: Segfault in my heart
-DIVA & CHOIR: Tearing me apart
-DIVA & CHOIR: Segfault in my heart
-DIVA & CHOIR: Reboot from the start
+DIVA & HARMONY: Segfault in my heart
+DIVA & HARMONY: Tearing me apart
+DIVA & HARMONY: Segfault in my heart
+DIVA & HARMONY: Reboot from the start
 
 [1:56] Break (the riff alone, filtered)
 ROBOT: Signal eleven
@@ -51,9 +50,9 @@ RAPPER: S-E-G-F-A-U-L-T!
 RAPPER: Segfault, segfault, let me show you how!
 
 [2:25] Last chorus (x4, a tone up, bigger choir)
-DIVA & CHOIR: Segfault in my heart
-DIVA & CHOIR: Tearing me apart
-DIVA & CHOIR: Segfault in my heart
-DIVA & CHOIR: Reboot from the start
+DIVA & HARMONY: Segfault in my heart
+DIVA & HARMONY: Tearing me apart
+DIVA & HARMONY: Segfault in my heart
+DIVA & HARMONY: Reboot from the start
 
 [2:54] Outro (drums)
