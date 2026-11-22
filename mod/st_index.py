@@ -41,8 +41,8 @@ FIELDS = ["path", "bytes", "iff", "rate", "loop_start", "loop_len", "seconds", "
 
 # the name says it best (English, German and Dutch sample names, abbreviations of the time)
 CATS = [("break", r"break|brk|beat(?!.*(drum|bass))|loop|groove|funky"),
-        ("kick", r"b(ass)?[-_ ]?drum|bd\b|bdrum|kick|bassd|\bbd\d|trommel"),
-        ("snare", r"snare|sn\b|sdrum|\bsd\d?\b|rim"),
+        ("kick", r"bas?s?[-_ ]?drum|bd\b|bdrum|kick|bassd|\bbd\d|trommel"),
+        ("snare", r"snare|sn\b|\bsdrum|\bsd\d?\b|rim"),
         ("hat", r"hi[-_ ]?hat|hh\b|hihat|hat\b|\bhh\d"),
         ("cymbal", r"crash|ride|cymb|splash|china"),
         ("tom", r"tom\b|toms|tom\d|tomtom"),

@@ -9,6 +9,7 @@ not in this repository; the modules (`out/`, not in git) carry them.
 | `mod.py` | the writer: `Module`, `sample()`, `pattern()`, `put(row, ch, note, sample, effect)`, `write()`, and `render()` (libopenmpt through ffmpeg, to WAV or MP3) |
 | `st_index.py`, `st_index.csv` | the index of all 10 646 samples: kind, pitch (note at C-2 and how sure), tonal or noisy, percussive or held, length, loudness, the 8SVX header's rate and loop, and the transpose and finetune that put it in tune |
 | `floppy_hardcore.py` | early rave (1991), 134 BPM, A minor: break, bass, M1 piano arpeggios, orchestra hits |
+| `minor_disk.py` | an Amiga demo tune, 125 BPM, A minor: drums on one channel, bass, arpeggio chords, a lead with vibrato; a B part, fills, the theme an octave up (a half-length copy of the sample: notes end at B-3), a last chord |
 | `break_test.py`, `bass_test.py` | auditions: breaks and basses from the pack |
 
 ```sh
@@ -26,6 +27,8 @@ not in this repository; the modules (`out/`, not in git) carry them.
 - `rate` is the 8SVX header's sample rate (IFF files only; raw files have no header). `bandwidth` is measured for
   every sample: Hz below which 99 % of its energy lies, played at C-2 (at most 4143); `find --min-bw 3000` keeps the
   bright ones. `render(..., bitrate="320k", rate=44100)` sets the MP3's bitrate and the output rate.
+- A looped sample (`loop="auto"`) rings until something stops it: a pattern without that part needs `C00` (volume 0)
+  on its channel, or its last note hangs on (Minor Disk v1, "a tone hangs from 1:32").
 - Drums (kick, snare, hat, cymbal, tom, perc, break) get no tuning: their pitch is not a note.
 - The categories are a guess: the name first (English, German and Dutch names of the time), then the sound.
 - Tempo: speed 6 (`F06`) and the BPM (`F86` is 134). A break plays one bar when its length matches: break004 at B-2
