@@ -10,6 +10,8 @@ not in this repository; the modules (`out/`, not in git) carry them.
 | `st_index.py`, `st_index.csv` | the index of all 10 646 samples: kind, pitch (note at C-2 and how sure), tonal or noisy, percussive or held, length, loudness, the 8SVX header's rate and loop, and the transpose and finetune that put it in tune |
 | `floppy_hardcore.py` | early rave (1991), 134 BPM, A minor: break, bass, M1 piano arpeggios, orchestra hits |
 | `minor_disk.py` | an Amiga demo tune, 125 BPM, A minor: drums on one channel, bass, arpeggio chords, a lead with vibrato; a B part, fills, the theme an octave up (a half-length copy of the sample: notes end at B-3), a last chord |
+| `can_you_tell_mod.py` | Can You Tell? as eurodance MOD (136 BPM, C minor): our own chorus vocals (Lem in the Qwen diva) as 8-bit phrases, a kick+clap sample, stacked M1 piano chords |
+| `rhythm_of_the_badge_mod.py` | The Rhythm Of The Badge as MOD (134 BPM, E minor): our diva, a hoover made here as a sample playing the song's 3-3-2 riff with an octave dive (2xx), piano chords |
 | `break_test.py`, `bass_test.py` | auditions: breaks and basses from the pack |
 
 ```sh
@@ -27,6 +29,9 @@ not in this repository; the modules (`out/`, not in git) carry them.
 - `rate` is the 8SVX header's sample rate (IFF files only; raw files have no header). `bandwidth` is measured for
   every sample: Hz below which 99 % of its energy lies, played at C-2 (at most 4143); `find --min-bw 3000` keeps the
   bright ones. `render(..., bitrate="320k", rate=44100)` sets the MP3's bitrate and the output rate.
+- Making samples (`mod.py`): `int8()`, `mix()` (two sounds on one channel), `stack(path, notes)` (a chord from one
+  pack sample, at the index's pitch), `phrases(wav, bpm)` (a rendered vocal stem cut into 2-bar phrases at 16 574 Hz:
+  triggered on C-3 they keep pitch and tempo; render the stem with `SOLO=vox PREVIEW=a-b` in code/).
 - A looped sample (`loop="auto"`) rings until something stops it: a pattern without that part needs `C00` (volume 0)
   on its channel, or its last note hangs on (Minor Disk v1, "a tone hangs from 1:32").
 - Drums (kick, snare, hat, cymbal, tom, perc, break) get no tuning: their pitch is not a note.

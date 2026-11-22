@@ -164,3 +164,68 @@ def pitch(path, rate=PAL / 428):
     f = rate / lag
     semis = 12 * np.log2(f / 16.3516) % 12           # above C
     return semis, f
+
+
+# ---------------------------------------------------------------- making samples
+C3_RATE = PAL / 214           # a sample plays at 16 574 Hz on C-3: make samples at this rate, trigger them on C-3
+
+
+def int8(x, peak=.98):
+    """float audio -> a signed 8-bit sample at `peak` of full scale (with a little dither)."""
+    x = np.asarray(x, dtype=float)
+    x = x / (np.abs(x).max() + 1e-9) * peak * 127
+    return np.clip(np.round(x + np.random.default_rng(1).uniform(-.5, .5, len(x))), -128, 127).astype(np.int8)
+
+
+def mix(*samples, peak=.97):
+    """Samples summed into one (a kick and a clap on one channel)."""
+    n = max(len(s) for s in samples)
+    y = np.zeros(n)
+    for s in samples:
+        y[:len(s)] += np.asarray(s, dtype=float)
+    return int8(y, peak)
+
+
+def stack(path, notes, seconds=.9, peak=.95):
+    """A sample from the pack played at several notes at once (MIDI) as one sample to trigger on C-3: a real
+    chord on one channel. Its pitch comes from the index (st_index.csv, f0 at C-2)."""
+    import st_index
+    x, _ = st_index.load(path)
+    f0 = float(st_index.lookup(path)["f0"])
+    x = x.astype(float)
+    t = np.arange(int(seconds * C3_RATE))
+    y = np.zeros(len(t))
+    for m in notes:
+        step = 440 * 2 ** ((m - 69) / 12) / (f0 * 2)          # on C-3 the sample runs twice as fast as on C-2
+        idx = t * step
+        ok = idx < len(x) - 1
+        i = idx[ok].astype(int)
+        fr = idx[ok] - i
+        y[:ok.sum()] += x[i] * (1 - fr) + x[i + 1] * fr
+    return int8(y, peak)
+
+
+def phrases(wav, bpm, bars_each=2, count=4, tail_bars=.5, highpass=120):
+    """A rendered vocal stem (WAV, from the bar the cut starts on) cut into `count` phrases of `bars_each` bars, at
+    16 574 Hz: triggered on C-3 each keeps its pitch and tempo. One gain for all, so they keep their balance."""
+    import wave
+    from scipy import signal
+    with wave.open(wav) as w:
+        sr, ch, n = w.getframerate(), w.getnchannels(), w.getnframes()
+        x = np.frombuffer(w.readframes(n), "<i2").astype(float).reshape(-1, ch).mean(1) / 32768
+    up, down = int(round(C3_RATE * 2)), sr * 2
+    g = np.gcd(up, down)
+    y = signal.resample_poly(x, up // g, down // g)
+    y = signal.sosfilt(signal.butter(2, highpass, "high", fs=C3_RATE, output="sos"), y)
+    bar = 240 / bpm
+    out = []
+    for k in range(count):
+        a = int(bars_each * k * bar * C3_RATE)
+        b = int((bars_each * (k + 1) + (tail_bars if k == count - 1 else 0)) * bar * C3_RATE)
+        seg = y[a:b].copy()
+        f = int(.01 * C3_RATE)
+        seg[:f] *= np.linspace(0, 1, f)
+        seg[-f:] *= np.linspace(1, 0, f)
+        out.append(seg)
+    peak = max(np.abs(s).max() for s in out)
+    return [(s / peak * 127 * .98).round().clip(-128, 127).astype(np.int8) for s in out]
