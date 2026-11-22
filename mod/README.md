@@ -23,6 +23,9 @@ not in this repository; the modules (`out/`, not in git) carry them.
   it a sample plays at its own pitch: the M1 piano on ST-44 sounds F# at C-2, so every chord came out a tritone off.
 - Half the pack is IFF 8SVX (a header, then the audio): `st_index.load` reads both kinds, so no header plays as a
   click. `loop="auto"` takes the 8SVX header's loop.
+- `rate` is the 8SVX header's sample rate (IFF files only; raw files have no header). `bandwidth` is measured for
+  every sample: Hz below which 99 % of its energy lies, played at C-2 (at most 4143); `find --min-bw 3000` keeps the
+  bright ones. `render(..., bitrate="320k", rate=44100)` sets the MP3's bitrate and the output rate.
 - Drums (kick, snare, hat, cymbal, tom, perc, break) get no tuning: their pitch is not a note.
 - The categories are a guess: the name first (English, German and Dutch names of the time), then the sound.
 - Tempo: speed 6 (`F06`) and the BPM (`F86` is 134). A break plays one bar when its length matches: break004 at B-2

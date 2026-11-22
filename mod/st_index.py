@@ -8,8 +8,11 @@ st_index.py find --cat bass --note C --min-conf 4 --max 20
 st_index.py show ST-44/m1piano8'        one sample's row
 
 Per sample (st_index.csv, one row each):
-  path, bytes, iff (an IFF 8SVX file: its header read, the audio is its BODY), rate (8SVX samples per second; 0 for
-  raw), loop_start, loop_len (bytes, from the 8SVX header; 0 without), seconds (at C-2, 8287 Hz), f0 (Hz at C-2),
+  path, bytes, iff (an IFF 8SVX file: its header read, the audio is its BODY), rate (8SVX samples per second, the
+  rate it was sampled at; 0 for raw files: they have no header), loop_start, loop_len (bytes, from the 8SVX header;
+  0 without), seconds (at C-2, 8287 Hz), bandwidth (Hz below which 99 % of its energy lies, played at C-2: at most
+  4143; double it for C-3; a low value is a dull or lo-fi sample),
+  f0 (Hz at C-2),
   note (the pitch it sounds at C-2, e.g. F#4), st (semitones above C, 0-12), conf (how clearly it has one pitch: the
   harmonic product spectrum's peak against its median, in dB; tonal samples score above about 20), tonal,
   flatness (0 a pure tone .. 1 noise), attack (s to the peak), decay (s from the peak to -20 dB; -1: it does not
@@ -32,8 +35,8 @@ PACK = os.path.expanduser(os.environ.get("ST_PACK", "~/Music/st-xx"))
 CSV = os.path.join(HERE, "st_index.csv")
 RATE = 7093789.2 / 2 / 428          # C-2 on a PAL Amiga: 8287 Hz
 NAMES = ["C-", "C#", "D-", "D#", "E-", "F-", "F#", "G-", "G#", "A-", "A#", "B-"]
-FIELDS = ["path", "bytes", "iff", "rate", "loop_start", "loop_len", "seconds", "f0", "note", "st", "conf", "tonal",
-          "flatness", "attack", "decay", "percussive", "peak_db", "rms_db", "lead", "category", "transpose",
+FIELDS = ["path", "bytes", "iff", "rate", "loop_start", "loop_len", "seconds", "bandwidth", "f0", "note", "st",
+          "conf", "tonal", "flatness", "attack", "decay", "percussive", "peak_db", "rms_db", "lead", "category", "transpose",
           "finetune"]
 
 # the name says it best (English, German and Dutch sample names, abbreviations of the time)
@@ -128,6 +131,11 @@ def analyse(rel):
     f0 = float(f[band][i0])
     conf = float((hp[band][i0] - np.median(hp[band])) * 20 / np.log(10) / 4)   # dB, per harmonic
     flat = float(np.exp(np.mean(np.log(S[1:]))) / np.mean(S[1:]))
+    # the bandwidth: below which 99 % of the energy lies, played at C-2 (8287 Hz: at most 4143 Hz); a dull, low-rate
+    # or filtered sample sits far under it. Scale it by the playback rate: at C-3 it is twice as high
+    full = np.abs(np.fft.rfft(x - x.mean())) ** 2
+    cum = np.cumsum(full) / (full.sum() + 1e-12)
+    bw = float(np.searchsorted(cum, .99) / len(full) * RATE / 2)
     st = 12 * np.log2(f0 / 16.3516)
     nearest = int(round(st))
     tonal = conf > 20 and flat < .5               # an orchestra hit (a chord, .47) still counts
@@ -146,7 +154,7 @@ def analyse(rel):
     off = st - 12 * np.floor(st / 12)
     tr = -int(round(off)) if round(off) <= 6 else 12 - int(round(off))
     fine = int(np.clip(round((round(off) - off) * 8), -8, 7))
-    return dict(row, f0=round(f0, 2), note=f"{NAMES[nearest % 12]}{nearest // 12}", st=round(off, 2),
+    return dict(row, bandwidth=int(bw), f0=round(f0, 2), note=f"{NAMES[nearest % 12]}{nearest // 12}", st=round(off, 2),
                 conf=round(conf, 1), tonal=int(tonal), flatness=round(flat, 3), attack=round(attack, 3),
                 decay=round(decay, 3), percussive=int(perc), peak_db=round(peak_db, 1), rms_db=round(rms_db, 1),
                 lead=round(lead, 3), category=cat, transpose=tr if tonal and cat not in DRUMS else 0,
@@ -187,7 +195,7 @@ def lookup(path):
 
 
 def find(words=(), cat=None, note=None, tonal=None, percussive=None, min_conf=None, min_s=None, max_s=None,
-         limit=30):
+         limit=30, min_bw=None):
     out = []
     for r in rows():
         low = r["path"].lower()
@@ -203,6 +211,8 @@ def find(words=(), cat=None, note=None, tonal=None, percussive=None, min_conf=No
             continue
         if min_conf is not None and (not r["conf"] or float(r["conf"]) < min_conf):
             continue
+        if min_bw is not None and float(r.get("bandwidth") or 0) < min_bw:
+            continue
         s = float(r["seconds"] or 0)
         if (min_s is not None and s < min_s) or (max_s is not None and s > max_s):
             continue
@@ -214,7 +224,8 @@ def find(words=(), cat=None, note=None, tonal=None, percussive=None, min_conf=No
 def show(r):
     loop = f" loop {r['loop_start']}+{r['loop_len']}" if r.get("loop_len") not in ("", "0") else ""
     iff = f" 8SVX {r['rate']} Hz" if r.get("iff") == "1" else ""
-    return (f"{r['path']:34s} {r['category']:7s} {float(r['seconds'] or 0):5.2f}s  {r['note'] or '-':4s} "
+    return (f"{r['path']:34s} {r['category']:7s} {float(r['seconds'] or 0):5.2f}s bw {r.get('bandwidth') or '-':>4} "
+            f"{r['note'] or '-':4s} "
             f"conf {r['conf'] or '-':>5} {'tonal' if r['tonal'] == '1' else '     '} "
             f"{'perc' if r['percussive'] == '1' else '    '} tr {r['transpose'] or 0:>3} ft {r['finetune'] or 0:>2}"
             f"{iff}{loop}")
@@ -232,6 +243,7 @@ if __name__ == "__main__":
     ap.add_argument("--min-conf", type=float)
     ap.add_argument("--min-s", type=float)
     ap.add_argument("--max-s", type=float)
+    ap.add_argument("--min-bw", type=float, help="the bandwidth at C-2 at least (Hz): bright samples")
     ap.add_argument("--max", type=int, default=30)
     a = ap.parse_args()
     if a.cmd == "build":
@@ -242,5 +254,5 @@ if __name__ == "__main__":
             print(show(r) if r else f"{w}: not in the index")
     else:
         for r in find(a.words, a.cat, a.note, True if a.tonal else None, True if a.perc else None, a.min_conf,
-                      a.min_s, a.max_s, a.max):
+                      a.min_s, a.max_s, a.max, a.min_bw):
             print(show(r))

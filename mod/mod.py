@@ -137,13 +137,16 @@ class Module:
         return path
 
 
-def render(src, dst, seconds=None):
-    """The module played by libopenmpt (ffmpeg), as WAV or MP3 (by the extension)."""
+def render(src, dst, seconds=None, bitrate="256k", rate=None):
+    """The module played by libopenmpt (ffmpeg), as WAV or MP3 (by the extension); bitrate: the MP3's ("320k"),
+    rate: the output sample rate (default libopenmpt's 48 kHz; 44100 for a CD)."""
     cmd = ["ffmpeg", "-loglevel", "error", "-y", "-i", src]
     if seconds:
         cmd += ["-t", str(seconds)]
+    if rate:
+        cmd += ["-ar", str(rate)]
     if dst.endswith(".mp3"):
-        cmd += ["-b:a", "256k"]
+        cmd += ["-b:a", bitrate]
     subprocess.run(cmd + [dst], check=True)
     return dst
 
