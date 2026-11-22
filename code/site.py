@@ -22,7 +22,18 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DEFAULT = os.path.join(os.path.dirname(os.path.dirname(HERE)), "annejan", "sunA")
 GROUPS = [("Saturday: 90's mellow house", lambda day: day.startswith("Saturday")),
           ("Sunday: eurodance", lambda day: day.startswith("Sunday")),
-          ("Rehearsals and a bonus", lambda day: not day.startswith(("Saturday", "Sunday")))]
+          ("Round two: a Dutch children's song with cartoon violence", lambda day: day.startswith("Round two")),
+          ("Rehearsals and a bonus", lambda day: not day.startswith(("Saturday", "Sunday", "Round two")))]
+MODDIR = os.path.join(os.path.dirname(HERE), "mod", "out")
+# the ProTracker modules made after the compo (mod/ in this repository): (file name, title, what it is)
+MODS = [("rhythm_of_the_badge_mod", "The Rhythm Of The Badge (MOD mix)",
+         "Eurodance, 134 BPM, E minor: our diva as 8-bit samples, a hoover made in code playing the 3-3-2 riff"),
+        ("can_you_tell_mod", "Can You Tell? (MOD mix)",
+         "Eurodance, 136 BPM, C minor: our chorus vocals as 8-bit samples, stacked M1 piano chords"),
+        ("floppy_hardcore", "Floppy Hardcore", "Early rave, 1991 style, 134 BPM, A minor: a break, a bass, M1 piano "
+         "arpeggios, orchestra hits"),
+        ("minor_disk", "Minor Disk", "An Amiga demo tune, 125 BPM, A minor: drums on one channel, arpeggio chords, a "
+         "lead with vibrato")]
 KEYS = {"m": "minor", "": "major"}
 
 CSS = """/* The sunA download page (site.py in github.com/annejan/sunA writes it). Shared layout comes from /style.css. */
@@ -71,7 +82,7 @@ def voices(sheet):
 
 def main():
     out = sys.argv[1] if len(sys.argv) > 1 else DEFAULT
-    for d in ("radio", "dj", "lyrics"):
+    for d in ("radio", "dj", "lyrics", "mod"):
         os.makedirs(os.path.join(out, d), exist_ok=True)
     groups = {g: [] for g, _ in GROUPS}
     for n, (wav, title, day, bpm, key, bars) in enumerate(share.SONGS, 1):
@@ -89,15 +100,37 @@ def main():
         group = next(g for g, test in GROUPS if test(day))
         e = html.escape
         lyr = f'<a href="lyrics/{name}.txt">Lyrics</a>' if os.path.exists(sheet) else ""
+        if wav in share.NO_DJ_ENDS:   # no drum ends: the radio edit is the whole song, one download
+            get = f'<a href="radio/{name}.mp3" download>MP3 <small>{megabytes(radio)}</small></a> {lyr}'
+        else:
+            get = (f'<a href="radio/{name}.mp3" download>Radio edit <small>MP3, {megabytes(radio)}</small></a> '
+                   f'<a href="dj/{name}-dj.mp3" download>DJ version <small>MP3, {megabytes(dj)}, {seconds(dj)}'
+                   f'</small></a> {lyr}')
         groups[group].append(f"""          <article class="song" id="{slug(title)}">
             <h4>{e(title)}</h4>
             <p class="when">{e(genre)} · {bpm} BPM · {key_name(key)} · {seconds(radio)}</p>
             <audio controls preload="none" src="radio/{name}.mp3"></audio>
-            <p class="get"><a href="radio/{name}.mp3" download>Radio edit <small>MP3, {megabytes(radio)}</small></a> <a href="dj/{name}-dj.mp3" download>DJ version <small>MP3, {megabytes(dj)}, {seconds(dj)}</small></a> {lyr}</p>
+            <p class="get">{get}</p>
             <p class="voices">{e(voices(sheet)) if os.path.exists(sheet) else ""}</p>
           </article>""")
+    mods = []
+    for fname, title, what in MODS:
+        src_mod, src_mp3 = (os.path.join(MODDIR, fname + ext) for ext in (".mod", ".mp3"))
+        if not (os.path.exists(src_mod) and os.path.exists(src_mp3)):
+            print(f"skipped {title}: run mod/{fname}.py first")
+            continue
+        name = fname.replace("_", "-")
+        shutil.copyfile(src_mod, os.path.join(out, "mod", name + ".mod"))
+        shutil.copyfile(src_mp3, os.path.join(out, "mod", name + ".mp3"))
+        e = html.escape
+        mods.append(f"""          <article class="song" id="{name}">
+            <h4>{e(title)}</h4>
+            <p class="when">{e(what)} · {seconds(src_mp3)}</p>
+            <audio controls preload="none" src="mod/{name}.mp3"></audio>
+            <p class="get"><a href="mod/{name}.mod" download>The module <small>ProTracker MOD, {os.path.getsize(src_mod) // 1024} KB</small></a> <a href="mod/{name}.mp3" download>MP3 <small>{megabytes(src_mp3)}</small></a></p>
+          </article>""")
     sections = []
-    for i, (group, songs) in enumerate(groups.items()):
+    for i, (group, songs) in enumerate(list(groups.items()) + [("MODs: ProTracker modules, made after the compo", mods)]):
         if songs:
             sections.append(f"""          <section aria-labelledby="g{i}">
             <h3 id="g{i}">{html.escape(group)}</h3>
@@ -138,6 +171,7 @@ def main():
           <section class="intro">
             <p class="lede">The songs for an all-AI music compo at a party with friends: Saturday 90's mellow house, Sunday eurodance.</p>
             <p>Every note and every sound is written in code by Claude: no samples, no loops, no song generator. The singer is <a href="https://wik-wav.neocities.org/lem-voicebank-tos">Lem the Shapeshifter DS 2.5</a> (DiffSinger), who sings the written notes and words, turned into Maya and Qwen voices with SoulX-Singer. The whole studio is in the <a href="https://github.com/annejan/sunA">sunA repository</a>.</p>
+            <p>Round two of the compo (a Dutch children's song with cartoon violence) is ACE-Step's own song from our words. After the compo came MODs: ProTracker modules for the Amiga, four channels, with the ST-XX sample disks of 1987 to 1991, our own vocals cut into 8-bit samples, and a few sounds made in code. They play in any tracker (pt2-clone, MilkyTracker, OpenMPT).</p>
             <p>Every song comes in two versions. The <strong>radio edit</strong> starts where the music comes in and fades out. The <strong>DJ version</strong> is the whole track, with 16 bars of drums at each end for mixing.</p>
           </section>
 {chr(10).join(sections)}
