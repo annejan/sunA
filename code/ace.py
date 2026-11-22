@@ -236,6 +236,8 @@ def main():
     ap.add_argument("--era", choices=["90s"])
     ap.add_argument("--match", type=float, default=0.0, help="cover, lego: 0-1, the tonal balance of our render")
     ap.add_argument("--seed", type=int, default=1)
+    ap.add_argument("--guidance", type=float, help="the DiT's CFG (SFT preset 1.0; 7.0 with --shift 3 won round two)")
+    ap.add_argument("--shift", type=float, help="the DiT's schedule shift (SFT preset 1.0)")
     ap.add_argument("--caption", help="replace the song's caption")
     ap.add_argument("--lyrics", help="a text file with the lyrics (ACE-Step format, [Section] tags) instead of the sheet")
     ap.add_argument("--native-tags", action="store_true", help="map the sheet's sections to ACE-Step's own tags")
@@ -268,6 +270,10 @@ def main():
     lyrics = open(a.lyrics, encoding="utf-8").read() if a.lyrics else ace_lyrics(n, native=a.native_tags)
     req = {"caption": caption, "lyrics": lyrics, "bpm": bpm, "keyscale": keyscale(key),
            "timesignature": "4", "vocal_language": "en", "seed": a.seed, "output_format": "wav16", **SYNTH[a.model]}
+    if a.guidance:
+        req["guidance_scale"] = a.guidance
+    if a.shift:
+        req["shift"] = a.shift
     base = os.path.join(out, tag)
     if a.mode in ("text", "lego"):
         req.update(duration=round(bars * 240 / bpm + 2), lm_model=LM)
