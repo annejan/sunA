@@ -210,6 +210,11 @@ def phrases(wav, bpm, bars_each=2, count=4, tail_bars=.5, highpass=120):
     16 574 Hz: triggered on C-3 each keeps its pitch and tempo. One gain for all, so they keep their balance."""
     import wave
     from scipy import signal
+    if not os.path.exists(wav):
+        name = os.path.basename(wav).split("_")[0].replace("-", "_")
+        bars = os.path.basename(wav).split("-preview")[1].split("-solovox")[0] if "-preview" in wav else "a-b"
+        raise SystemExit(f"{wav} is not there (renders/scratch is cleaned up): render the stem again in code/ with "
+                         f"SOLO=vox PREVIEW={bars} .venv/bin/python {name}.py")
     with wave.open(wav) as w:
         sr, ch, n = w.getframerate(), w.getnchannels(), w.getnframes()
         x = np.frombuffer(w.readframes(n), "<i2").astype(float).reshape(-1, ch).mean(1) / 32768
